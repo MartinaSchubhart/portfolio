@@ -1,0 +1,15 @@
+/* text reveal: headlines tagged with [data-reveal] are split into
+   lines + characters by script/text-reveal.js (GSAP SplitText); each
+   character fades and rises into place.
+
+   font-kerning is disabled so the per-char split state and the reverted
+   plain-text state share the exact same letter metrics — with kerning
+   on, revert snaps the pairs back and the whole headline visibly jumps.
+   No-JS visitors simply see the (un-kerned) headline. */
+[data-reveal] {
+    font-kerning: none;
+}
+
+.tr-char {
+    will-change: transform, opacity;
+}

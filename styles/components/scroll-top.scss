@@ -1,0 +1,49 @@
+/* subtle scroll-to-top button, injected + toggled by script/scroll-top.js.
+   Sits below the veil (z-index 100) so page transitions cover it. */
+.scroll-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 50;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    cursor: pointer;
+    color: var(--background);
+    background: rgba(24, 24, 27, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    /* hidden until scrolled down; just a fade so it stays subtle */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background 0.2s ease;
+
+    svg {
+        width: 18px;
+        height: 18px;
+        display: block;
+    }
+
+    &:hover { background: rgba(24, 24, 27, 0.78); }
+}
+
+.scroll-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 700px) {
+    .scroll-top {
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+    }
+}

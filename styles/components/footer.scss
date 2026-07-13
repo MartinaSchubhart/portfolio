@@ -1,0 +1,135 @@
+/* shared yellow closing section: CTA on the landing page,
+   "More case Studies" on case-study pages — footer links live inside it */
+.closing {
+    background: var(--yellow);
+    color: var(--ink);
+    padding: 100px var(--page-margin) 32px;
+}
+
+.closing__title {
+    @include type-scale(xl);
+    max-width: 16ch;
+}
+
+/* CTA link: text left, arrow right. Colour changes on hover; the arrow
+   rolls out to the right while a duplicate enters from the left
+   (mirror of .cs-back-btn). */
+.closing__link {
+    @include type-scale(xl);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2em;
+    width: fit-content;
+    color: var(--text);
+    transition: color 0.3s ease;
+    margin-top: 24px;
+
+    &:hover {
+        color: var(--brown);
+    }
+}
+
+.closing__link__arrow {
+    position: relative;
+    flex: none;
+    display: inline-block;
+    overflow: hidden;
+    width: 0.9em;
+    height: 0.9em;
+
+    svg {
+        display: block;
+        width: 0.9em;
+        height: 0.9em;
+        fill: currentColor;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* duplicate waits just off-frame to the left */
+    svg:last-child {
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.closing__link:hover .closing__link__arrow svg:first-child { transform: translateX(100%); }
+.closing__link:hover .closing__link__arrow svg:last-child  { transform: translateX(0); }
+
+.closing__email {
+    display: inline-block;
+    margin-top: 56px;
+    font-size: 15px;
+
+    &:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}
+
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-top: 140px;
+    @include type-scale(sm);
+    border-top: 1px solid var(--light-yellow);
+    padding-top: 40px;
+}
+
+/* when the footer is the only thing in the closing band (e.g. the imprint
+   page — no CTA above it), don't push it down with the big top margin */
+.closing > .site-footer:first-child {
+    margin-top: 0;
+}
+
+.site-footer__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* links shrink to their text so the line matches */
+    gap: 10px;
+
+    /* hover: draw a line in from the left */
+    a {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -3px;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        &:hover::after {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.site-footer__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+}
+
+@media (max-width: 700px) {
+    .site-footer {
+        flex-direction: column;
+        /* reset from the desktop row: stack the groups with a tight,
+           consistent gap instead of spreading them via space-between +
+           the 40px row gap */
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 24px;
+        margin-top: 90px;
+    }
+    .site-footer__meta { text-align: left; }
+}

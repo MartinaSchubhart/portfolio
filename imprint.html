@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Imprint — Martina Schubhart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<link rel="stylesheet" href="styles/index-min.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal-ready');</script>
+</head>
+<body>
+
+  <!-- veil: transition overlay; covered pre-paint when arriving mid-transition (?pt=1) -->
+  <div class="veil" aria-hidden="true">
+    <svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M -250 1320 C 250 920, 650 1180, 1250 580" />
+      <path d="M -250 960 C 250 560, 650 820, 1250 220" />
+      <path d="M -250 600 C 250 200, 650 460, 1250 -140" />
+      <path d="M -250 240 C 250 -160, 650 100, 1250 -500" />
+    </svg>
+  </div>
+  <script>
+    if (/[?&]pt=1(?:&|$)/.test(location.search)) {
+      document.querySelector(".veil").classList.add("is-covered");
+    }
+  </script>
+  <noscript><style>.veil{ display:none !important; }</style></noscript>
+  <script src="script/veil.js" defer></script>
+  <script src="script/nav-hover.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+  <script src="script/smooth-scroll.js" defer></script>
+  <script src="script/scroll-top.js" defer></script>
+
+  <nav class="site-nav">
+    <div class="site-nav__left">
+      <a class="site-nav__name" href="index.html">Martina Schubhart</a>
+    </div>
+    <div class="site-nav__right">
+      <span class="site-nav__role">Art Director &amp; Digital Designer</span>
+        <div class="site-nav__links">
+          <a href="index.html#about">About</a>
+          <a href="index.html#work">Work</a>
+        </div>
+    </div>
+  </nav>
+
+  <!-- NOTE: replace every [bracketed placeholder] with the real details and
+       have the final wording reviewed. Requirements per Austrian § 5 ECG and
+       § 25 MedienG (media owner, address, contact, business object, etc.). -->
+  <section class="legal">
+    <h1 class="legal__title">Imprint</h1>
+    <p class="legal__intro">
+      Information pursuant to § 5 of the Austrian E-Commerce Act (ECG) and disclosure
+      pursuant to § 25 of the Austrian Media Act (MedienG).
+    </p>
+
+    <div class="legal__body">
+
+      <h2>Media owner &amp; responsible for the content</h2>
+      <p>
+        Martina Schubhart<br>
+        [Street and house number]<br>
+        [Postal code] Vienna<br>
+        Austria
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:martina.schubhart@gmail.com">martina.schubhart@gmail.com</a><br>
+        Phone: [+43 …]
+      </p>
+
+      <h2>Business details</h2>
+      <p>
+        Object of the business: Graphic and communication design (art direction &amp; digital design).<br>
+        VAT identification number (UID): [ATU… — or: exempt from VAT under the small-business rule, § 6 para. 1 no. 27 UStG].<br>
+        Chamber membership: [e.g. Austrian Economic Chamber (WKO) — if applicable].<br>
+        Applicable trade regulations: Gewerbeordnung (GewO), available at
+        <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener">ris.bka.gv.at</a>.<br>
+        Supervisory authority: [competent district administrative authority, e.g. Magistrat der Stadt Wien].
+      </p>
+
+      <h2>Online dispute resolution</h2>
+      <p>
+        Consumers have the option of submitting complaints to the EU's online dispute
+        resolution platform. We are neither obliged nor willing to participate in a
+        dispute-resolution procedure before a consumer arbitration board.
+      </p>
+
+      <h2>Liability for content</h2>
+      <p>
+        The contents of this website have been created with the greatest possible care.
+        However, no guarantee can be given for the accuracy, completeness or timeliness
+        of the content.
+      </p>
+
+      <h2>Liability for links</h2>
+      <p>
+        This website contains links to external websites operated by third parties, over
+        whose content we have no control. No liability can therefore be accepted for such
+        external content. The respective provider or operator of the linked pages is always
+        responsible for their content.
+      </p>
+
+      <h2>Copyright</h2>
+      <p>
+        All content on this website — texts, images, graphics and design — is protected by
+        copyright. Any use outside the limits of copyright law requires prior written consent.
+        &copy; <span id="imprint-year">2026</span> Martina Schubhart. All rights reserved.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="closing">
+    <footer class="site-footer">
+      <div class="site-footer__col">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+      </div>
+      <div class="site-footer__col">
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">Linkedin</a>
+        <a href="imprint.html">Imprint</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <div class="site-footer__meta">
+        <p>Made with Claude Code &amp; VS Code</p>
+        <p>&copy; Martina Schubhart</p>
+      </div>
+    </footer>
+  </section>
+
+</body>
+</html>

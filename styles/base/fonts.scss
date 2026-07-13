@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'Acid Grotesk Regular';
+  src:
+    url('../fonts/FFF-AcidGrotesk-Regular.woff2') format('woff2'),
+    url('../fonts/FFF-AcidGrotesk-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Regular';
+  src: url('../fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Medium';
+  src: url('../fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+// Type scale
+$type-scale-desktop: (
+  xs: (
+    font-family: $font-inter-medium,
+    size: 14px,
+    line-height: 120%,
+    letter-spacing: 0.2px
+  ),
+  sm: (
+    font-family: $font-inter-medium,
+    size: 19px,
+    line-height: 120%,
+    letter-spacing: -0.4px
+  ),
+  md: (
+    font-family:  $font-inter-regular,
+    size: 28px,
+    line-height: 130%,
+    letter-spacing: -0.9px
+  ),
+  lg: (
+    font-family: $font-acid-grotesk,
+    size: 50px,
+    line-height: 100%,
+    letter-spacing: -1px
+  ),
+  xl: (
+    font-family: $font-acid-grotesk,
+    size: 86px,
+    line-height: 1,
+    letter-spacing: -1px
+  )
+);
+
+
+// Type scale Mobile
+$type-scale-mobile: (
+  xs: (
+    font-family: $font-inter-medium,
+    size: 12px,
+    line-height: 120%,
+    letter-spacing: 0.2px
+  ),
+  sm: (
+    font-family: $font-inter-medium,
+    size: 16px,
+    line-height: 120%,
+    letter-spacing: -0.4px
+  ),
+  md: (
+    font-family:  $font-inter-regular,
+    size: 22px,
+    line-height: 130%,
+    letter-spacing: -0.9px
+  ),
+  lg: (
+    font-family: $font-acid-grotesk,
+    size: 30px,
+    line-height: 100%,
+    letter-spacing: -1px
+  ),
+  xl: (
+    font-family: $font-acid-grotesk,
+    size: 50px,
+    line-height: 1,
+    letter-spacing: -1px
+  )
+);
+
+
+// Mixin
+@mixin type-scale($step) {
+  $mobile: map-get($type-scale-mobile, $step);
+  $desktop: map-get($type-scale-desktop, $step);
+
+  font-family: map-get($mobile, font-family);
+  font-size: map-get($mobile, size);
+  line-height: map-get($mobile, line-height);
+  letter-spacing: map-get($mobile, letter-spacing);
+
+  @media (min-width: 768px) {
+    font-family: map-get($desktop, font-family);
+    font-size: map-get($desktop, size);
+    line-height: map-get($desktop, line-height);
+    letter-spacing: map-get($desktop, letter-spacing);
+  }
+
+}

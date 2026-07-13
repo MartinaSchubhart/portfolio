@@ -1,0 +1,73 @@
+.site-nav {
+    align-items: baseline;
+    @include type-scale(sm);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding: 24px var(--page-margin);
+    border-bottom: 1px solid var(--light-grey);
+
+    /* fallback for no-JS (links never get .nav-roll) */
+    a:not(.nav-roll):hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}
+
+/* hover roll: the link text slides up out of frame while a duplicate
+   rises from below to replace it. The .nav-roll class, the data-text
+   attribute, and the inner <span> wrapper are all added by
+   script/nav-hover.js (progressive enhancement). */
+.nav-roll {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+
+    > span {
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &::after {
+        content: attr(data-text);
+        color: var(--muted);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &:hover > span { transform: translateY(-100%); }
+    &:hover::after { transform: translateY(0); }
+}
+
+.site-nav__left {
+    grid-column: span 3;
+}
+
+.site-nav__right {
+    grid-column: span 9;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; 
+}
+
+.site-nav__name {
+    color: var(--text);
+}
+
+.site-nav__role {
+    color: var(--muted);
+}
+
+.site-nav__links {
+    display: flex;
+    gap: 28px;
+}
+
+@media (max-width: 700px) {
+    .site-nav__role { display: none; }
+}

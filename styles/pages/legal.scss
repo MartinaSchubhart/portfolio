@@ -1,0 +1,39 @@
+/* legal / imprint page */
+.legal {
+    padding: 140px var(--page-margin) 120px;
+    max-width: 780px;
+}
+
+.legal__title {
+    @include type-scale(lg);
+    margin-bottom: 48px;
+}
+
+.legal__intro {
+    color: var(--muted);
+    margin-bottom: 40px;
+    @include type-scale(sm);
+}
+
+.legal__body {
+    h2 {
+        @include type-scale(sm);
+        margin: 40px 0 10px;
+    }
+
+    p {
+        font-family: $font-inter-regular;
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--muted);
+        margin-bottom: 14px;
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &:hover { color: var(--muted); }
+    }
+}

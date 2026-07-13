@@ -1,0 +1,28 @@
+/* scroll reveal — listed content elements start nudged down and slide up
+   into place as they enter the viewport (transform only, no opacity).
+
+   The initial offset is gated behind html.reveal-ready, added pre-paint by
+   a tiny inline <head> script (skipped under reduced-motion), so there is
+   no flash and no-JS / reduced-motion visitors see final positions.
+   Reveal + per-row left-to-right stagger are handled by scroll-reveal.js.
+
+   NOTE: keep this selector list in sync with SELECTOR in scroll-reveal.js */
+.reveal-ready {
+    .about__text, .about__label, .about__detail,
+    .work__title, .work__label, .work-card,
+    .closing__title, .closing__email,
+    .cs-header__intro, .cs-media,
+    .cs-text-row__label, .cs-text-row__body,
+    .closing__more-title {
+        transform: translateY(56px);
+        /* `scale` is listed too so the work-card hover-scale still transitions
+           while this (higher-specificity) reveal rule is active; only the
+           work-card actually changes scale, so it is a no-op elsewhere */
+        transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+                    scale 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .is-revealed {
+        transform: none;
+    }
+}

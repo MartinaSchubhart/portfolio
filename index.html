@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Martina Schubhart — Art Director & Brand Designer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="styles/index-min.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal-ready');</script>
+</head>
+<body>
+
+  <!-- veil: preloader on cold loads, transition overlay otherwise;
+       starts covered here so the landing page always opens on yellow -->
+  <div class="veil is-covered" aria-hidden="true">
+    <svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M -250 1320 C 250 920, 650 1180, 1250 580" />
+      <path d="M -250 960 C 250 560, 650 820, 1250 220" />
+      <path d="M -250 600 C 250 200, 650 460, 1250 -140" />
+      <path d="M -250 240 C 250 -160, 650 100, 1250 -500" />
+    </svg>
+  </div>
+  <noscript><style>.veil{ display:none !important; }</style></noscript>
+  <script src="script/veil.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+  <script src="script/text-reveal.js" defer></script>
+  <script src="script/work-cursor.js" defer></script>
+  <script src="script/scroll-reveal.js" defer></script>
+  <script src="script/nav-hover.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+  <script src="script/smooth-scroll.js" defer></script>
+  <script src="script/scroll-top.js" defer></script>
+
+  <nav class="site-nav">
+    <div class="site-nav__left">
+      <a class="site-nav__name" href="index.html">Martina Schubhart</a>      
+    </div>
+    <div class="site-nav__right">
+      <span class="site-nav__role">Art Director &amp; Digital Designer</span>
+        <div class="site-nav__links">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+        </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero__meta">
+      <p class="about__text">Welcome. I'm Martina Schubhart, a digital &amp; editorial designer based in Vienna, Austria with over 15 years of experience. I strive to combine tangible business solutions with stunning design work to create memorable brands and 360 campaigns that get real results.</p>
+      
+      <a class="scroll-btn" href="index.html#work">
+        <span class="scroll-btn__arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true""><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true""><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg>
+        </span>
+        <span class="scroll-btn__label">Scroll for more</span>        
+      </a>
+    </div>
+    <h1 class="hero__title" data-reveal>Art Director &amp; Brand Designer helping bold brands stand out through strategy, story, and design.</h1>
+  </section>
+
+
+  <section class="work" id="work">
+    <div class="work__grid">
+      <a class="work-card" href="case-study-beiersdorf.html">
+        <img class="work-card__img" src="assets/bdf/case-Beiersdorf-Hero.webp" alt="Beiersdorf Annual Report" />
+        <div class="work-card__info">
+          <h3 class="work-card__title">Beiersdorf Annual Report</h3>
+          <p class="work-card__tags">Branding / Motion / Print / Social / Web</p>
+        </div>
+      </a>
+      <a class="work-card" href="case-study-hugoboss.html">
+        <img class="work-card__img" src="assets/hb/case-HugoBoss-Hero.webp" alt="Hugo Boss Annual Report" />
+        <div class="work-card__info">
+          <h3 class="work-card__title">Hugo Boss Annual Report</h3>
+          <p class="work-card__tags">Branding / Motion / Print / Social / Web</p>
+        </div>
+      </a>
+      <a class="work-card" href="case-study-break4you.html">
+        <img class="work-card__img" src="assets/b4y/case-break4you-hero.webp" alt="Break4You Online-Coach" />
+        <div class="work-card__info">
+          <h3 class="work-card__title">Break4You Online-Coach</h3>
+          <p class="work-card__tags">Concept / UI Design / Illustration</p>
+        </div>
+      </a>
+      <a class="work-card" href="case-study-lebenswege.html">
+        <img class="work-card__img" src="assets/lbw/case-lebenswege-hero.webp" alt="Lebenswege Magazine" />
+        <div class="work-card__info">
+          <h3 class="work-card__title">Lebenswege Magazine</h3>
+          <p class="work-card__tags">Editorial Design</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <span class="about__label">About me</span>
+
+    <div class="about__detail">
+      <p>Art Director &amp; Brand Designer helping bold brands stand out through strategy, story, and design.</p>
+      <p>I hold a Bachelor's degree in Graphic Design and have been working in the design industry for over a decade. During this time, I have honed my skills in design principles, user experience, and front-end development. I'm proficient in design tools such as Adobe Creative Suite, Sketch, and Figma, and have a deep understanding of front-end development languages like HTML, CSS, and JavaScript.
+        </p><p>
+My passion for design started when I was young, and I have pursued this passion by working with a variety of clients and projects over the years. I have worked with startups, small businesses, and large corporations, creating user interfaces for websites, software applications, and mobile apps.
+</p>
+</div>
+  </section>
+
+  <section class="closing">
+    <h2 class="closing__title">Interested in<br>working together?</h2>
+    <a class="closing__link" href="mailto:martina.schubhart@gmail.com">      
+      <span class="closing__link__arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" aria-hidden="true"><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+      </span>
+      <span class="closing__link__label">Lets connect!</span>
+    </a>
+    <a href="mailto:martina.schubhart@gmail.com">martina.schubhart@gmail.com</a>
+    <a href="#">Linkedin</a>
+
+
+    <footer class="site-footer">
+      <div class="site-footer__col">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="site-footer__col">        
+        <a href="imprint.html">Imprint</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <div class="site-footer__meta">
+        <p>Made with Claude Code & VS Code</p>
+        <p>© Martina Schubhart</p>
+      </div>
+    </footer>
+  </section>
+
+</body>
+</html>

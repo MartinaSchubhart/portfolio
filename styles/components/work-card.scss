@@ -1,0 +1,132 @@
+/* case-study card: used in the landing "Work" grid and in
+   "More case Studies" on case-study pages */
+.work-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--brown);
+    border-radius: var(--radius);
+    aspect-ratio: 1 / 0.9;
+    padding: 20px 24px;
+    color: var(--text-on-dark);
+
+    /* hover: gently shrink the whole card. Uses the `scale` property (not
+       `transform`) so it composes with the scroll-reveal's translateY
+       instead of overwriting it, and keeps its own faster timing. */
+    transition: scale 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover {
+        scale: 0.97;
+    }
+}
+
+/* fills the card behind the label; sits under the scrim + text */
+.work-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* top scrim keeps the label legible over any image */
+.work-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(12, 8, 5, 0.45), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.work-card--wide {
+    aspect-ratio: 16 / 10;
+}
+
+.work-card__info {
+    position: absolute;
+    inset: 20px 24px auto; /* matches the card's padding box */
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    /* pointer devices: start pushed up out of the card frame (clipped by the
+       card's overflow:hidden) and slide down into place on hover. Touch /
+       no-hover devices keep it in its normal, always-visible position. */
+    @media (hover: hover) and (pointer: fine) {
+        transform: translateY(calc(-100% - 40px));
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+}
+
+.work-card:hover .work-card__info {
+    transform: translateY(0);
+}
+
+.work-card__title {
+    position: relative;
+    z-index: 2;
+    @include type-scale(sm);
+    background: rgba(0,0,0,0.3);
+    border-radius: 50px;
+    padding: 8px 16px;
+}
+
+.work-card__tags {
+    position: relative;
+    z-index: 2;
+    margin-top: 2px;
+    text-transform: uppercase;
+    @include type-scale(xs);
+    color: var(--text-on-dark);
+    background: rgba(0,0,0,0.3);
+    border-radius: 50px;
+    padding: 8px 16px;
+}
+
+@media (max-width: 700px) {
+    .work-card { aspect-ratio: 4 / 2.5; }
+
+    /* landing "Work" grid: stack the card — image on top, caption below in
+       black (instead of the image-fill + overlaid caption used elsewhere).
+       Scoped to .work__grid so the case-study "More case Studies" cards
+       (brown boxes, no image) are untouched. */
+    .work__grid {
+        .work-card {
+            aspect-ratio: auto;
+            overflow: visible;
+            background: transparent;
+            padding: 0;
+            color: var(--text);
+        }
+
+        .work-card__img {
+            position: static;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            border-radius: var(--radius);
+        }
+
+        .work-card::before { display: none; } /* drop the legibility scrim */
+
+        .work-card__info {
+            position: static;
+            transform: none;          /* no hover slide; sits below the image */
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 12px;
+            color: var(--text);
+        }
+
+        .work-card__title,
+        .work-card__tags {
+            background: transparent;  /* remove the dark pills */
+            padding: 0;
+            color: var(--text);
+        }
+    }
+}
