@@ -43,23 +43,21 @@
     }
 }
 
+/* heading bottom-left, counter bottom-right, both inset to the page margin */
 .preloader-header {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: var(--page-margin);
+    top: var(--page-margin);
 
     h1 {
-        text-transform: uppercase;
-        font-size: clamp(2rem, 10vw, 15rem);
-        line-height: 0.85;
+        @include type-scale(xl);
     }
 }
 
 .preloader-counter {
     position: absolute;
-    top: -1.5rem;
-    left: calc(100% + 1.5rem);
+    right: var(--page-margin);
+    bottom: var(--page-margin);
     overflow: hidden;
 
     p {

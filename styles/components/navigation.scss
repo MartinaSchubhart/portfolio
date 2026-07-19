@@ -24,13 +24,37 @@
         text-decoration: underline;
         text-underline-offset: 3px;
     }
+
+    a { position: relative; }
+
+    /* invisible tap target: enlarges the clickable area around each link
+       (~45px tall) so they are easier to hit, especially on mobile. It is
+       absolutely positioned and transparent, so nothing moves and nothing
+       shows. Kept small enough that neighbouring targets never overlap. */
+    a::before {
+        content: "";
+        position: absolute;
+        top: -14px;
+        bottom: -14px;
+        left: -12px;
+        right: -12px;
+    }
 }
 
 /* hover roll: the link text slides up out of frame while a duplicate
-   rises from below to replace it. The .nav-roll class, the data-text
-   attribute, and the inner <span> wrapper are all added by
-   script/nav-hover.js (progressive enhancement). */
+   rises from below to replace it. The .nav-roll class, the inner
+   .nav-roll__inner wrapper and its data-text attribute are all added by
+   script/nav-hover.js (progressive enhancement).
+
+   The overflow clipping sits on .nav-roll__inner rather than on the <a>
+   so the anchor stays unclipped and its oversized tap target (the
+   .site-nav a::before above) is not cut off. */
 .nav-roll {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-roll__inner {
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -50,10 +74,10 @@
         transform: translateY(100%);
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
-    &:hover > span { transform: translateY(-100%); }
-    &:hover::after { transform: translateY(0); }
 }
+
+.nav-roll:hover .nav-roll__inner > span { transform: translateY(-100%); }
+.nav-roll:hover .nav-roll__inner::after { transform: translateY(0); }
 
 .site-nav__left {
     grid-column: span 3;

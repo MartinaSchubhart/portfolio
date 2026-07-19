@@ -41,7 +41,7 @@ $type-scale-desktop: (
   ),
   md: (
     font-family:  $font-inter-regular,
-    size: 26px,
+    size: clamp(1.2rem, 1rem + 2vw, 1.625rem),
     line-height: 135%,
     letter-spacing: -0.5px
   ),
