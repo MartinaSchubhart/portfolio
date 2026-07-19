@@ -24,7 +24,7 @@
     pointer-events: none;
 }  
 
-.page-case .closing__content {
+.page-case .closing__title, .page-case .closing__links {
     z-index: 2;
     position: relative;
 }
@@ -34,50 +34,6 @@
     max-width: 16ch;
 }
 
-/* CTA link: text left, arrow right. Colour changes on hover; the arrow
-   rolls out to the right while a duplicate enters from the left
-   (mirror of .cs-back-btn). */
-.closing__link {
-    @include type-scale(xl);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2em;
-    width: fit-content;
-    color: var(--text);
-    transition: color 0.3s ease;
-    margin-top: 24px;
-
-    &:hover {
-        color: var(--brown);
-    }
-}
-
-.closing__link__arrow {
-    position: relative;
-    flex: none;
-    display: inline-block;
-    overflow: hidden;
-    width: 0.9em;
-    height: 0.9em;
-
-    svg {
-        display: block;
-        width: 0.9em;
-        height: 0.9em;
-        fill: currentColor;
-        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* duplicate waits just off-frame to the left */
-    svg:last-child {
-        position: absolute;
-        inset: 0;
-        transform: translateX(-100%);
-    }
-}
-
-.closing__link:hover .closing__link__arrow svg:first-child { transform: translateX(100%); }
-.closing__link:hover .closing__link__arrow svg:last-child  { transform: translateX(0); }
 
 .closing__links {
     @include type-scale(md);

@@ -14,8 +14,7 @@
 
 .hero-cs {
     align-items: flex-start;
-    min-height: calc(50vh - 71px);
-    margin-top: 80px;
+    min-height: calc(30vh - 71px);
     position: relative;
 
     
@@ -40,6 +39,8 @@
 
     @media (min-width: 768px) {
         align-items: flex-end;
+        min-height: calc(50vh - 71px);
+        margin-top: 80px;
     }
 }
 
@@ -173,13 +174,13 @@
 
 .cs-text-row__label {
     @include type-scale(sm);
-    color: var(--text-on-dark-dim);
+    color: var(--muted);
     padding-top: 3px;  
     padding-bottom: 24px;
     display: block;  
 
     @media (min-width: 768px) {
-        grid-column: 1 / span 2;
+        grid-column: 1 / span 3;
     }
 }
 
@@ -215,7 +216,7 @@
 }
 
 .cs-project-meta__label {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   text-transform: uppercase;
   @include type-scale(xs);
   color: var(--text-on-dark-faint2);
@@ -307,3 +308,60 @@
     .icon-pause { display: none; }
   }
 }
+
+.next__case {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+    margin-top: 140px;
+
+    a {
+        grid-column: 1 / span 12;
+    }
+}
+
+
+/* CTA link: text left, arrow right. Colour changes on hover; the arrow
+   rolls out to the right while a duplicate enters from the left
+   (mirror of .cs-back-btn). */
+.next__case__link {
+    @include type-scale(xl);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2em;
+    width: fit-content;
+    color: var(--background);
+    transition: color 0.3s ease;
+    margin-top: 24px;
+
+    &:hover {
+        color: var(--yellow);
+    }
+}
+
+.next__link__arrow {
+    position: relative;
+    flex: none;
+    display: inline-block;
+    overflow: hidden;
+    width: 0.9em;
+    height: 0.9em;
+
+    svg {
+        display: block;
+        width: 0.9em;
+        height: 0.9em;
+        fill: currentColor;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* duplicate waits just off-frame to the left */
+    svg:last-child {
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.next__case__link:hover .next__case__link__arrow svg:first-child { transform: translateX(100%); }
+.next__case__link:hover .next__case__link__arrow svg:last-child  { transform: translateX(0); }
