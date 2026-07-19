@@ -9,9 +9,9 @@
    the reverted plain-text state share identical letter metrics — with
    kerning on, revert would snap every letter and shift the headline.
 
-   Coordinated with the veil: when the page loads covered in yellow,
-   the reveal waits for the veil sweep to start so the letters emerge
-   as the yellow clears. On plain loads it plays right away. */
+   Coordinated with the veil: when the page loads covered by the curtain,
+   the reveal waits for the veil to start clearing so the letters emerge
+   as the curtain lifts. On plain loads it plays right away. */
 
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -19,12 +19,17 @@
 
   gsap.registerPlugin(SplitText);
 
+  /* hold the headline while a cover is in front of it: either the page-
+     transition curtain (.veil.is-covered) or the first-load preloader
+     (html.is-preloading). Both fire `veil:reveal` as they clear. */
   var veil = document.querySelector('.veil');
-  var veilCovered = !!veil && veil.classList.contains('is-covered');
-  var veilRevealed = false;
-  document.addEventListener('veil:reveal', function () { veilRevealed = true; }, { once: true });
+  var preloading = document.documentElement.classList.contains('is-preloading');
+  var covered = preloading || (!!veil && veil.classList.contains('is-covered'));
+  var revealed = false;
+  document.addEventListener('veil:reveal', function () { revealed = true; }, { once: true });
 
   var DELAY_AFTER_VEIL = 0.35; /* headline area is uncovered mid-sweep */
+  var FALLBACK_MS = preloading ? 6500 : 2500; /* preloader lifts later than the curtain */
 
   function fontsReady() {
     return (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
@@ -62,13 +67,13 @@
         setTimeout(function () { tl.play(); }, (delay || 0) * 1000);
       }
 
-      if (!veilCovered) {
+      if (!covered) {
         play(0.1);
-      } else if (veilRevealed) {
+      } else if (revealed) {
         play(DELAY_AFTER_VEIL);
       } else {
         document.addEventListener('veil:reveal', function () { play(DELAY_AFTER_VEIL); }, { once: true });
-        setTimeout(function () { play(0); }, 2500); /* never leave a headline hidden */
+        setTimeout(function () { play(0); }, FALLBACK_MS); /* never leave a headline hidden */
       }
     });
   });

@@ -1,0 +1,73 @@
+/* "Folio26" preloader — shown once per browser session on the landing page.
+   Stacked, rotated work images reveal one by one and then collapse, and the
+   whole dark panel clips up and off the top to hand over to the page. Driven
+   by script/preloader.js (GSAP). Coordinated with the headline reveal via the
+   `veil:reveal` event, and hidden pre-paint on repeat loads by an inline
+   script so it never flashes. */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 10001; /* above the page-transition veil (10000) */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    background-color: var(--background-dark);
+    color: var(--background);
+    overflow: hidden;
+    will-change: clip-path;
+}
+
+.preloader-images {
+    position: absolute;
+    inset: 0;
+}
+
+.preloader-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 300px;
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center center;
+    clip-path: polygon(20% 20%, 80% 20%, 80% 80%, 20% 80%);
+    will-change: transform, clip-path;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius);
+    }
+}
+
+.preloader-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+        text-transform: uppercase;
+        font-size: clamp(2rem, 10vw, 15rem);
+        line-height: 0.85;
+    }
+}
+
+.preloader-counter {
+    position: absolute;
+    top: -1.5rem;
+    left: calc(100% + 1.5rem);
+    overflow: hidden;
+
+    p {
+        font-size: clamp(1rem, 1.5vw, 2rem);
+        line-height: 0.85;
+    }
+}
+
+@media (max-width: 480px) {
+    .preloader-img { width: 62vw; height: 74vw; }
+}

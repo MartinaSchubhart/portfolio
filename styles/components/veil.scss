@@ -1,43 +1,23 @@
-/* veil: full-screen yellow made of thick curved strokes.
-   Serves as the preloader on the landing page AND as the page
-   transition on every page. All motion is driven by script/veil.js
-   (Web Animations API) — this file only defines the two resting states.
-
-   Default state: hidden (strokes collapsed, transparent).
-   .is-covered:   solid yellow — set statically on index.html (preloader)
-                  or pre-paint via inline script when arriving with ?pt=1. */
+/* veil: page-transition curtain (black). A solid dark panel swipes up from
+   the bottom to cover the screen, the page navigates, then it continues up
+   and off the top to reveal the new page. On the landing page it also runs
+   once on load as a short intro. Driven by script/veil.js (Web Animations
+   API on clip-path). */
 .veil {
     position: fixed;
     inset: 0;
-    z-index: 100;
+    z-index: 10000; /* above everything, incl. the follow-cursor */
+    background-color: var(--background-dark);
+    /* idle: collapsed to an invisible line at the bottom */
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
     pointer-events: none;
-    background: transparent;
-
-    svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-    }
-
-    path {
-        fill: none;
-        stroke: var(--yellow);
-        stroke-linecap: round;
-        stroke-width: 0;
-        opacity: 0;
-    }
+    will-change: clip-path;
 }
 
+/* pre-paint covered state — set in the HTML on the landing page (intro) or
+   added by the inline script when arriving mid-transition (?pt=1) */
 .veil.is-covered {
-    /* solid backdrop guarantees full coverage during the hold;
-       the strokes fully tile the screen, so JS can drop it the
-       moment the reveal starts without any visible change */
-    background: var(--yellow);
-
-    path {
-        stroke-width: 540;
-        opacity: 1;
-    }
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

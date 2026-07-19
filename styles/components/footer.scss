@@ -1,9 +1,32 @@
 /* shared yellow closing section: CTA on the landing page,
    "More case Studies" on case-study pages — footer links live inside it */
 .closing {
-    background: var(--yellow);
-    color: var(--ink);
+    color: var(--text);
     padding: 100px var(--page-margin) 32px;
+    position: relative;
+}
+
+.page-case .closing::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+
+    height: 80%; /* Adjust fade length */
+    background: linear-gradient(
+        to top,
+        transparent,
+        var(--background)
+    );
+
+    pointer-events: none;
+}  
+
+.page-case .closing__content {
+    z-index: 2;
+    position: relative;
 }
 
 .closing__title {
@@ -56,10 +79,13 @@
 .closing__link:hover .closing__link__arrow svg:first-child { transform: translateX(100%); }
 .closing__link:hover .closing__link__arrow svg:last-child  { transform: translateX(0); }
 
-.closing__email {
+.closing__links {
+    @include type-scale(md);
+    margin-top: 24px;
+}
+
+.closing__email, .closing__linkedin {
     display: inline-block;
-    margin-top: 56px;
-    font-size: 15px;
 
     &:hover {
         text-decoration: underline;
@@ -74,7 +100,7 @@
     gap: 40px;
     margin-top: 140px;
     @include type-scale(sm);
-    border-top: 1px solid var(--light-yellow);
+    border-top: 1px solid var(--muted-muted);
     padding-top: 40px;
 }
 

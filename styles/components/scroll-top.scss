@@ -1,5 +1,5 @@
 /* subtle scroll-to-top button, injected + toggled by script/scroll-top.js.
-   Sits below the veil (z-index 100) so page transitions cover it. */
+   Sits below the veil (z-index 10000) so page transitions cover it. */
 .scroll-top {
     position: fixed;
     right: 24px;

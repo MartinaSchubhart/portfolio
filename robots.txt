@@ -1,0 +1,5 @@
+# Ask crawlers not to crawl any part of this site.
+# Note: pages also carry <meta name="robots" content="noindex, nofollow">,
+# which is what actually keeps them out of search results.
+User-agent: *
+Disallow: /

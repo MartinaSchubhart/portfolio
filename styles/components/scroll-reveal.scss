@@ -10,11 +10,11 @@
 .reveal-ready {
     .about__text, .about__label, .about__detail,
     .work__title, .work__label, .work-card,
-    .closing__title, .closing__email,
+    .closing__title, .closing__email, .closing__linkedin, .closing__divider, .closing__link,
     .cs-header__intro, .cs-media,
     .cs-text-row__label, .cs-text-row__body,
     .closing__more-title {
-        transform: translateY(56px);
+        transform: translateY(24px);
         /* `scale` is listed too so the work-card hover-scale still transitions
            while this (higher-specificity) reveal rule is active; only the
            work-card actually changes scale, so it is a no-op elsewhere */

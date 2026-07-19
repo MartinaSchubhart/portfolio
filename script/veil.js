@@ -1,28 +1,33 @@
-/* veil: preloader + page transition.
-   Reveal: strokes thin out & fade, bottom-left band first -> top-right.
-   Cover (before navigating): the reverse — strokes grow & fade in,
-   top-right band first -> bottom-left. Navigation happens fully covered;
-   the next page arrives covered (?pt=1, applied pre-paint by an inline
-   script) and plays the reveal.
-
-   The handoff travels via URL param, not sessionStorage, so it also
-   works under file:// where every document is its own storage origin. */
-
+/* veil: black page-transition curtain.
+ *
+ * A solid dark panel animates via clip-path (Web Animations API):
+ *   - cover  : swipes up from the bottom to fill the screen, then navigates
+ *   - reveal : continues up and off the top to uncover the new page
+ *
+ * The next page is told to open already covered via a `?pt=1` query param;
+ * an inline <head> script on each page adds `.is-covered` pre-paint so there
+ * is no flash before this (deferred) script runs. The handoff travels via
+ * URL param, not sessionStorage, so it also works under file:// where every
+ * document is its own storage origin. The landing page starts `.is-covered`
+ * in its markup so it plays a short intro on cold load.
+ *
+ * On reveal we dispatch a `veil:reveal` event so the headline text-reveal
+ * can start in sync as the curtain clears. */
 (function () {
   var veil = document.querySelector('.veil');
   if (!veil) return;
 
-  var paths = Array.prototype.slice.call(veil.querySelectorAll('path'));
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var PARAM = 'pt';
-  var DUR = 700;          /* per-stroke sweep duration */
-  var STAGGER = 80;       /* delay between bands */
-  var HOLD = 350;         /* yellow hold on a cold load (preloader) */
-  var ARRIVAL_HOLD = 60;  /* yellow hold when arriving mid-transition */
+  var DURATION = 650;
   var EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
-  var TOTAL = DUR + STAGGER * (paths.length - 1);
 
+  var BOTTOM = 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)'; // collapsed at bottom (hidden)
+  var FULL   = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';     // covering the screen
+  var TOP    = 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)';         // collapsed at top (hidden)
+
+  // did we arrive mid-transition? strip the param so refreshes are clean
   var params = new URLSearchParams(location.search);
   var arrived = params.has(PARAM);
   if (arrived) {
@@ -31,97 +36,80 @@
     history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
   }
 
-  function setHidden() {
-    veil.classList.remove('is-covered');
-    veil.style.background = 'transparent';
-    paths.forEach(function (p) {
-      p.getAnimations().forEach(function (a) { a.cancel(); });
-      p.style.strokeWidth = '0px';
-      p.style.opacity = '0';
-    });
+  // pre-paint covered state comes from the .is-covered class (landing intro,
+  // or added by the inline script when ?pt=1). From here JS drives clip-path
+  // via inline styles, which override the class's clip-path. We keep the
+  // class on the element because text-reveal.js reads it to sync the headline.
+  var startCovered = veil.classList.contains('is-covered');
+  veil.style.clipPath = startCovered ? FULL : BOTTOM;
+
+  function hide() {
+    veil.getAnimations().forEach(function (a) { a.cancel(); });
+    veil.style.clipPath = BOTTOM;
+    veil.style.pointerEvents = '';
   }
 
-  function sweep(orderedPaths, from, to, done) {
-    var called = false;
-    function finish() {
-      if (called) return;
-      called = true;
-      if (done) done();
-    }
-    orderedPaths.forEach(function (p, i) {
-      var anim = p.animate([from, to], {
-        duration: DUR,
-        delay: i * STAGGER,
-        easing: EASE,
-        fill: 'forwards'
-      });
-      if (i === orderedPaths.length - 1) anim.onfinish = finish;
-    });
-    setTimeout(finish, TOTAL + 250); /* fallback if onfinish never fires */
+  // restore idle state if the page is served from the bfcache
+  window.addEventListener('pageshow', function (e) { if (e.persisted) hide(); });
+
+  if (reduced) return; // CSS hides the veil entirely; use native navigation
+
+  // ---- reveal (uncover on arrival / landing intro) ----------------------
+  if (startCovered) {
+    var HOLD = arrived ? 60 : 350; // brief hold; a touch longer for the intro
+    setTimeout(function () {
+      document.dispatchEvent(new CustomEvent('veil:reveal'));
+      var anim = veil.animate(
+        [{ clipPath: FULL }, { clipPath: TOP }],
+        { duration: DURATION, easing: EASE, fill: 'forwards' }
+      );
+      var done = false;
+      function finish() { if (done) return; done = true; hide(); }
+      anim.onfinish = finish;
+      anim.oncancel = finish;
+      setTimeout(finish, DURATION + 200); // safety net if the frame never fires
+    }, HOLD);
   }
 
-  function reveal() {
-    /* let the rest of the page sync to the sweep (e.g. headline reveal) */
-    document.dispatchEvent(new CustomEvent('veil:reveal'));
-    /* strokes fully tile the screen right now, so dropping the solid
-       backdrop is invisible — the reveal happens through the strokes */
-    veil.style.background = 'transparent';
-    sweep(
-      paths, /* DOM order = bottom-left band first */
-      { strokeWidth: '540px', opacity: 1 },
-      { strokeWidth: '0px', opacity: 0 },
-      setHidden
-    );
-  }
-
-  /* restored from bfcache mid-transition: never stay covered */
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) setHidden();
-  });
-
-  if (reduced) return; /* CSS hides the veil entirely; native navigation */
-
-  if (veil.classList.contains('is-covered')) {
-    setTimeout(reveal, arrived ? ARRIVAL_HOLD : HOLD);
-  }
-
-  /* intercept internal links: cover, then navigate */
+  // ---- cover (intercept same-origin link clicks) ------------------------
   document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
     var link = e.target.closest('a[href]');
     if (!link) return;
-    if (link.target && link.target !== '_self') return;
     if (link.hasAttribute('download')) return;
-    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    if (link.target && link.target !== '_self') return;
 
     var url;
     try { url = new URL(link.href, location.href); } catch (err) { return; }
 
+    // only intercept in-site navigations
     if (location.protocol === 'file:') {
       if (url.protocol !== 'file:') return;
-      /* file:// gives every document a unique origin — skip origin check */
     } else {
       if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
       if (url.origin !== location.origin) return;
     }
+    // ignore same-page links (anchors on the current document)
     if (url.pathname === location.pathname && url.search === location.search) return;
 
     e.preventDefault();
+    veil.style.pointerEvents = 'auto';
+
+    var anim = veil.animate(
+      [{ clipPath: BOTTOM }, { clipPath: FULL }],
+      { duration: DURATION, easing: EASE, fill: 'forwards' }
+    );
 
     var navigated = false;
     function go() {
       if (navigated) return;
       navigated = true;
-      /* fully covered now — pin the solid backdrop for the unload gap */
-      veil.style.background = 'var(--yellow)';
       url.searchParams.set(PARAM, '1');
       window.location.href = url.toString();
     }
-
-    sweep(
-      paths.slice().reverse(), /* reverse: top-right band first */
-      { strokeWidth: '0px', opacity: 0 },
-      { strokeWidth: '540px', opacity: 1 },
-      go
-    );
+    anim.onfinish = go;
+    anim.oncancel = go;
+    setTimeout(go, DURATION + 200); // safety net if the frame never fires
   });
 })();

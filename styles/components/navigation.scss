@@ -1,11 +1,23 @@
 .site-nav {
+    position: relative;
     align-items: baseline;
     @include type-scale(sm);
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 24px;
     padding: 24px var(--page-margin);
-    border-bottom: 1px solid var(--light-grey);
+
+    /* divider inset to the page margins instead of a full-bleed border */
+    &::after {
+        content: "";
+        position: absolute;
+        left: var(--page-margin);
+        right: var(--page-margin);
+        bottom: 0;
+        height: 1px;
+        background: var(--muted-muted);
+    }
+
 
     /* fallback for no-JS (links never get .nav-roll) */
     a:not(.nav-roll):hover {

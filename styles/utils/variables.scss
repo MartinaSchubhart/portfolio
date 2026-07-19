@@ -7,14 +7,13 @@ $font-inter-medium: 'Inter Medium', sans-serif;
   --background: #FCFAF7;
   --text: #18181B;
   --background-dark: #0C0805;
-  --muted: #A1A1AA;
+  //--muted: #A1A1AA;
+  //--muted: rgba(24,24,27,0.8)
+  --muted: #5E5E5B;
+  --muted-muted: rgba(42,5,37,0.2);
 
   --brown: #3c2515;
-  --yellow: #f7d45c;
-  --light-yellow: #FBF683;
-
-  --light-grey: #E4E4E7;
-
+  --yellow: #FAF09E;
 
   --text-on-dark: #FCFAF7;
   --text-on-dark-dim: #DADADD;
@@ -30,6 +29,6 @@ $font-inter-medium: 'Inter Medium', sans-serif;
   :root {
     --page-margin: 48px;
     --grid-gap: 24px;
-    --radius: 24px;
+    --radius: 16px;
   }
 }

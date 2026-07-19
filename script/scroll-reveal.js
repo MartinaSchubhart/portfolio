@@ -15,7 +15,7 @@
   var SELECTOR = [
     '.about__text', '.about__label', '.about__detail',
     '.work__title', '.work__label', '.work-card',
-    '.closing__title', '.closing__email',
+    '.closing__title', '.closing__email', '.closing__linkedin', '.closing__divider', '.closing__link',
     '.cs-header__intro', '.cs-media',
     '.cs-text-row__label', '.cs-text-row__body',
     '.closing__more-title', '.about__detail'
@@ -30,7 +30,7 @@
     return;
   }
 
-  var STEP = 0.24; // seconds of delay per column within a row
+  var STEP = 0.16; // seconds of delay per column within a row
 
   // how many reveal targets precede this one on the same visual row
   // (same parent, same offsetTop) -> its left-to-right column index

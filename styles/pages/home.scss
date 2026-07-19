@@ -1,3 +1,15 @@
+/* landing page: fixed (sticky) decorative background behind all content.
+   A fixed pseudo-element is used (not background-attachment: fixed) so it
+   stays put reliably across browsers, including mobile. */
+.page-home::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url('../assets/softyellowbg.svg') center center / cover no-repeat;
+    pointer-events: none;
+}
+
 /* hero */
 .hero {
     padding: 180px var(--page-margin) 0;
@@ -8,32 +20,36 @@
     align-items: flex-start;
     padding-bottom: 10vh;
     padding: 100px var(--page-margin);
+    position: relative;
 
     @media (min-width: 768px) {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         gap: 24px;
     }
+
 }
 
 .hero__meta {     
     height: 100%;
     padding-top: 10px;
+    z-index: 2;
 
     @media (min-width: 768px) {
         display: flex;
         grid-column: 1 / span 2;
         flex-direction: column;
         justify-content: space-between;
-        
+        padding-right: 20%;        
     }
 }
 
 .hero__title {
+    z-index: 2;
     @include type-scale(xl);
 
     @media (min-width: 768px) {
-        grid-column: 4 / span 9;
+        grid-column: 4 / span 8;
     }
 }
 
@@ -44,11 +60,13 @@
     .hero {
         display: flex;
         flex-flow: column nowrap;
-        justify-content: flex-start;
+        justify-content: flex-end;
         align-items: stretch;
     }
-    .hero__title { order: -1; }
+    
+    .page-home .hero__title { order: -1; }
     .hero__meta { height: auto; }
+    .page-home .about__text {display: none;}
 }
 
 
@@ -104,10 +122,38 @@
 .scroll-btn:hover .scroll-btn__arrow svg:last-child  { transform: translateY(0); }
 
 .work {
-    padding: 100px var(--page-margin);
+    position: relative;
+    padding: 180px var(--page-margin);
+    background: var(--background-dark);
+    margin-top: 100px;
+    color: var(--background);
+    align-items: baseline;
+}
+
+.work__text {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding-bottom: 48px;
+}
+
+.work__title {
+    @include type-scale(lg);
+    grid-column: 1 / span 6;
+    align-self: baseline;
+}
+
+.work__meta {
+    @include type-scale(sm);
+    text-align: right;
+    color: var(--muted);
+    grid-column: 7 / span 6;
+    align-self: baseline;
 }
 
 .work__grid {
+    position: relative;
+    z-index: 1; /* keep the cards above the dark band below */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--grid-gap);
@@ -142,7 +188,7 @@
     display: block;
 
     @media (min-width: 768px) {
-         grid-column: span 3;
+        grid-column: 1 / span 2;
     }
 }
 
@@ -151,7 +197,7 @@
     @include type-scale(md);    
 
     @media (min-width: 768px) {
-         grid-column: span 9;
+         grid-column: 4 / span 7;
     }
 
     p {

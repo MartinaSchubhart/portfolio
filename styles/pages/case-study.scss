@@ -1,7 +1,46 @@
+/* landing page: fixed (sticky) decorative background behind all content.
+   A fixed pseudo-element is used (not background-attachment: fixed) so it
+   stays put reliably across browsers, including mobile. */
+.page-case::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url('../assets/softyellowbg.svg') center center / cover no-repeat;
+    pointer-events: none;
+}
+
+
+
 .hero-cs {
-    align-items: flex-end;
+    align-items: flex-start;
     min-height: calc(50vh - 71px);
     margin-top: 80px;
+    position: relative;
+
+    
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+
+        height: 100%; /* Adjust fade length */
+
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            var(--background)
+        );
+
+        pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+        align-items: flex-end;
+    }
 }
 
 .hero__meta-cs {
@@ -140,7 +179,7 @@
     display: block;  
 
     @media (min-width: 768px) {
-        grid-column: span 3;
+        grid-column: 1 / span 2;
     }
 }
 
@@ -150,7 +189,7 @@
     gap: var(--grid-gap);    
 
     @media (min-width: 768px) {
-        grid-column: span 8;
+        grid-column: 4 / span 7;
     }
 
     p {

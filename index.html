@@ -2,27 +2,72 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Martina Schubhart — Art Director & Brand Designer</title>
+<title>Martina Schubhart — Art Director &amp; Brand Designer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<!-- Replace YOUR-DOMAIN.com with the real domain, and add favicon.svg,
+     favicon.ico, apple-touch-icon.png and a 1200x630 share-image.jpg at the site root. -->
+<meta name="description" content="Portfolio of Martina Schubhart, a senior art director and brand designer based in Vienna, working across branding, editorial and digital design." />
+<meta name="author" content="Martina Schubhart" />
+<meta name="theme-color" content="#FCFAF7" />
+<meta name="color-scheme" content="light" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:site_name" content="Martina Schubhart" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://YOUR-DOMAIN.com/" />
+<meta property="og:title" content="Martina Schubhart — Art Director &amp; Brand Designer" />
+<meta property="og:description" content="Portfolio of Martina Schubhart, a senior art director and brand designer based in Vienna, working across branding, editorial and digital design." />
+<meta property="og:image" content="https://YOUR-DOMAIN.com/share-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Martina Schubhart — portfolio" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Martina Schubhart — Art Director &amp; Brand Designer" />
+<meta name="twitter:description" content="Portfolio of Martina Schubhart, a senior art director and brand designer based in Vienna, working across branding, editorial and digital design." />
+<meta name="twitter:image" content="https://YOUR-DOMAIN.com/share-image.jpg" />
 <link rel="stylesheet" href="styles/index-min.css">
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal-ready');</script>
 </head>
-<body>
+<body class="page-home">
 
-  <!-- veil: preloader on cold loads, transition overlay otherwise;
-       starts covered here so the landing page always opens on yellow -->
-  <div class="veil is-covered" aria-hidden="true">
-    <svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <path d="M -250 1320 C 250 920, 650 1180, 1250 580" />
-      <path d="M -250 960 C 250 560, 650 820, 1250 220" />
-      <path d="M -250 600 C 250 200, 650 460, 1250 -140" />
-      <path d="M -250 240 C 250 -160, 650 100, 1250 -500" />
-    </svg>
+  <!-- Folio26 preloader: plays once per browser session on the landing page -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader-images">
+      <div class="preloader-img"><img src="assets/bdf/case-Beiersdorf-Hero.webp" alt="" /></div>
+      <div class="preloader-img"><img src="assets/hb/case-HugoBoss-Hero.webp" alt="" /></div>
+      <div class="preloader-img"><img src="assets/b4y/case-break4you-hero.webp" alt="" /></div>
+      <div class="preloader-img"><img src="assets/lbw/case-lebenswege-hero.webp" alt="" /></div>
+      <div class="preloader-img"><img src="assets/lbw/case-lebenswege-collage-1.webp" alt="" /></div>
+      <div class="preloader-img"><img src="assets/b4y/casestudy-break4you-design-illustration.webp" alt="" /></div>
+    </div>
+    <div class="preloader-header">
+      <h1>Folio26</h1>
+      <div class="preloader-counter"><p>000</p></div>
+    </div>
   </div>
+  <script>
+    window.PRELOADER_SESSION_KEY = "preloaderShown";
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem(window.PRELOADER_SESSION_KEY)) {
+      document.querySelector('.preloader').style.display = 'none';
+    }
+  </script>
+  <noscript><style>.preloader{ display:none !important; }</style></noscript>
+
+  <!-- veil: black page-transition curtain; covered pre-paint when arriving
+       mid-transition (?pt=1) so there is no flash -->
+  <div class="veil" aria-hidden="true"></div>
+  <script>
+    if (/[?&]pt=1(?:&|$)/.test(location.search)) {
+      document.querySelector(".veil").classList.add("is-covered");
+    }
+  </script>
   <noscript><style>.veil{ display:none !important; }</style></noscript>
   <script src="script/veil.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+  <script src="script/preloader.js" defer></script>
   <script src="script/text-reveal.js" defer></script>
   <script src="script/work-cursor.js" defer></script>
   <script src="script/scroll-reveal.js" defer></script>
@@ -32,23 +77,22 @@
   <script src="script/scroll-top.js" defer></script>
 
   <nav class="site-nav">
-    <div class="site-nav__left">
-      <a class="site-nav__name" href="index.html">Martina Schubhart</a>      
-    </div>
-    <div class="site-nav__right">
-      <span class="site-nav__role">Senior Designer</span>
-        <div class="site-nav__links">
-          <a href="#about">About</a>
-          <a href="#work">Work</a>
-        </div>
-    </div>
+      <div class="site-nav__left">
+        <a class="site-nav__name" href="index.html">Martina Schubhart</a>      
+      </div>
+      <div class="site-nav__right">
+        <span class="site-nav__role">Senior Designer based in Vienna</span>
+          <div class="site-nav__links">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+          </div>
+      </div>
   </nav>
 
   <section class="hero">
     <div class="hero__meta">
-      <p class="about__text">Welcome. Hi, I'm Martina Schubhart, an Art Director and Senior Designer based in Vienna. 
-        I enjoy turning complex ideas into visual communication that feels clear, engaging and easy to understand.
-        Whether it's a digital product, an annual report or a brand experience, I believe great design starts with understanding.</p>
+      <p class="about__text">Welcome. Hi, I'm Martina Schubhart, a Senior Designer based in Vienna. I&nbsp;enjoy finding the ideas, stories and details 
+        that make communication memorable.</p>
       <p class="about__text"></p>
       <a class="scroll-btn" href="index.html#work">
         <span class="scroll-btn__arrow">
@@ -58,11 +102,15 @@
         <span class="scroll-btn__label">Scroll for more</span>        
       </a>
     </div>
-    <h1 class="hero__title" data-reveal>Senior Designer <br> creating thoughtful design for digital and editorial communication.</h1>
+    <h1 class="hero__title" data-reveal>Senior Designer <br> passionate about creating thoughtful design for digital and editorial communication.</h1>
   </section>
 
 
   <section class="work" id="work">
+    <div class="work__text">
+      <div class="work__title">Work</div> 
+      <div class="work__meta">(Selected Case Studies)</div>
+    </div>
     <div class="work__grid">
       <a class="work-card" href="case-study-beiersdorf.html">
         <img class="work-card__img" src="assets/bdf/case-Beiersdorf-Hero.webp" alt="Beiersdorf Annual Report" />
@@ -122,8 +170,7 @@
       </span>
       <span class="closing__link__label">Lets connect!</span>
     </a>
-    <a href="mailto:martina.schubhart@gmail.com">martina.schubhart@gmail.com</a>
-    <a href="#">Linkedin</a>
+    <div class="closing__links"><a class="closing__email" href="mailto:martina.schubhart@gmail.com">martina.schubhart@gmail.com</a>  <span style="display: inline-block" class="closing__divider">•</span>  <a class="closing__linkedin" href="https://at.linkedin.com/in/martina-schubhart-01020b167">Linkedin</a></div>
 
 
     <footer class="site-footer">
