@@ -99,9 +99,13 @@
     align-items: flex-end;
     gap: 40px;
     margin-top: 140px;
-    @include type-scale(sm);
+    @include type-scale(xs);
     border-top: 1px solid var(--muted-muted);
     padding-top: 40px;
+
+    @media (min-width: 768px) {
+        @include type-scale(sm);
+    } 
 }
 
 /* when the footer is the only thing in the closing band (e.g. the imprint

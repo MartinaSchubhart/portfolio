@@ -64,13 +64,13 @@ $type-scale-desktop: (
 $type-scale-mobile: (
   xs: (
     font-family: $font-inter-medium,
-    size: 12px,
+    size: 13px,
     line-height: 120%,
-    letter-spacing: 0.2px
+    letter-spacing: 0px
   ),
   sm: (
     font-family: $font-inter-medium,
-    size: 14px,
+    size: 16px,
     line-height: 120%,
     letter-spacing: 0px
   ),
@@ -88,7 +88,7 @@ $type-scale-mobile: (
   ),
   xl: (
     font-family: $font-acid-grotesk,
-    size: clamp(2rem, 1rem + 4vw, 4rem),
+    size: clamp(2.5rem, 1rem + 4vw, 5.375rem),
     line-height: 1,
     letter-spacing: -1px
   )

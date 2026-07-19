@@ -270,6 +270,9 @@
     .cs-text-row { grid-template-columns: 1fr; gap: var(--grid-gap); padding: 56px 16px; }
     .cs-media-grid { grid-template-columns: 1fr; }
     .closing__grid { grid-template-columns: 1fr; }
+
+    /* hero image (first media on the page) crops to a square on mobile */
+    .cs-main > .cs-media:first-child { aspect-ratio: 1 / 1; }
 }
 
 

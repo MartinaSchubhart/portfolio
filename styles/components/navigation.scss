@@ -81,5 +81,13 @@
 }
 
 @media (max-width: 700px) {
+    /* drop the 12-col grid: just name on the left, links pinned right */
+    .site-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    .site-nav__right { justify-content: flex-end; }
+    .site-nav__name { white-space: nowrap; }
     .site-nav__role { display: none; }
 }
