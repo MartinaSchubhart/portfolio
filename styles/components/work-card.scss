@@ -80,9 +80,8 @@
     position: relative;
     z-index: 2;
     margin-top: 2px;
-    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
     @include type-scale(xs);
-    color: var(--text-on-dark);
     background: rgba(0,0,0,0.3);
     border-radius: 50px;
     padding: 8px 16px;
@@ -129,7 +128,9 @@
             background: transparent;  /* remove the dark pills */
             padding: 0;
             color: var(--background);
-            @include type-scale(sm);
+            @include type-scale(md);
         }
+
+        .work-card__tags {display:none;}
     }
 }
